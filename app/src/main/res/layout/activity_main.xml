@@ -11,6 +11,11 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:id="@+id/et1"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/urldefault"
+        android:id="@+id/et3" />
 
     <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:id="@+id/btn1" android:text="@string/Go"/>

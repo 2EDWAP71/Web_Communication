@@ -23,10 +23,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     {
         public String doInBackground(String...arguments) {
             HttpURLConnection conn = null;
+            String url = arguments[0];
+            String artist = arguments[1];
+
+            if (url == null || url.isEmpty() ||
+                    artist == null || artist.isEmpty()){
+                return "Error";
+            }
 
             try {
-                URL url = new URL("http://www.free-map.org.uk/course/mad/ws/hits.php?artist=oasis");
-                conn = (HttpURLConnection) url.openConnection();
+                URL urlobj = new URL( url + "?artist=" + artist);
+                conn = (HttpURLConnection) urlobj.openConnection();
                 InputStream in = conn.getInputStream();
                 if (conn.getResponseCode() == 200) {
                     BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -64,7 +71,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
     public void onClick(View v){
+
+        EditText artistEditText = (EditText) findViewById(R.id.et1);
+        String artist = artistEditText.getText().toString();
+
+        EditText urlEditText =(EditText) findViewById(R.id.et3);
+        String url = urlEditText.getText().toString();
         MyTask t = new MyTask();
-        t.execute();
+        t.execute(url,artist);
     }
 }

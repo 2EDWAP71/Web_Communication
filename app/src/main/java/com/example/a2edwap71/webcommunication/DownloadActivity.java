@@ -17,13 +17,15 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.downloadact);
         Button go = (Button) findViewById(R.id.btn1);
-        go.setOnClickListener(this);
+
 
        Button downloadButton = (Button) findViewById(R.id.btndownload);
        downloadButton.setOnClickListener(this);
 
        Button addSongButton = (Button) findViewById(R.id.btnadd);
         addSongButton.setOnClickListener(this);
+
+
     }
 
     public void onClick (View view){
@@ -32,7 +34,10 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
 
         }
         else if (view.getId() == R.id.btnadd){
-            startActivity(new Intent(this, DownloadActivity.class));
+            startActivity(new Intent(this, AddSongActivity.class));
         }
+
+
+
     }
 }

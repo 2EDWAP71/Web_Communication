@@ -9,7 +9,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-
+         </activity>
+        <activity android:name=".AddSongActivity">
         </activity>
         <activity android:name=".DownloadActivity">
             <intent-filter>

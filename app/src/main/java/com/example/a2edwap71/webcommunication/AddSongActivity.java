@@ -53,22 +53,22 @@ public class AddSongActivity extends AppCompatActivity implements View.OnClickLi
             Song song = songs[0];
 
             if(song !=null){
-                HttpURLConnection connection;
+                HttpURLConnection conn = null;
                 try{
                     URL urlobj = new URL("http://www.free-map.org.uk/course/mad/ws/addhit.php");
-                    connection = (HttpURLConnection) urlobj.openConnection();
+                    conn = (HttpURLConnection) urlobj.openConnection();
 
                     String postData = "songs=" + song.getTitle()
                             + "artist=" + song.getTitle()
                             + "year=" + song.getTitle();
-                    connection.setDoOutput(true);
-                    connection.setFixedLengthStreamingMode(postData.length());
+                    conn.setDoOutput(true);
+                    conn.setFixedLengthStreamingMode(postData.length());
 
-                    OutputStream out = connection.getOutputStream();
+                    OutputStream out = conn.getOutputStream();
                     out.write(postData.getBytes());
 
-                    if (connection.getResponseCode() == 200){
-                        InputStream in = connection.getInputStream();
+                    if (conn.getResponseCode() == 200){
+                        InputStream in = conn.getInputStream();
                         BufferedReader br = new BufferedReader(new InputStreamReader(in));
                         String result = "", line;
                         while ((line = br.readLine()) != null)
@@ -90,6 +90,8 @@ public class AddSongActivity extends AppCompatActivity implements View.OnClickLi
 
                 }
             }
+            return "Error:";
         }
+
     }
 }

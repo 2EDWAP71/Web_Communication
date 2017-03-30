@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String url = arguments[0];
             String artist = arguments[1];
 
+
             if (url == null || url.isEmpty() ||
                     artist == null || artist.isEmpty()){
                 return "Error";
@@ -57,8 +58,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                  iartist= curobj.getString("artist");
                                   int year = curobj.getInt("year"),
                                  quantity = curobj.getInt("quantity");
-                         text+="Name " + name + "Artist " + iartist + "Year " + year + "Quantity " +
-                                 quantity;
+                         text+="\n Name:  " + name + "  Artist:  " + iartist + "  Year:  " + year
+                                 + " Quantity:  " + quantity;
                      }
 
                      return text;

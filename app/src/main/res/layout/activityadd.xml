@@ -28,4 +28,11 @@
         android:layout_height="wrap_content"
         android:text="Add Song"
         android:id="@+id/button" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/resultsText"
+        android:layout_weight="0.98" />
+
 </LinearLayout>

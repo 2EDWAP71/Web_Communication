@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -55,27 +56,34 @@ public class AddSongActivity extends AppCompatActivity implements View.OnClickLi
             if(song !=null){
                 HttpURLConnection conn = null;
                 try{
+                    //Connect to URL
                     URL urlobj = new URL("http://www.free-map.org.uk/course/mad/ws/addhit.php");
-                    conn = (HttpURLConnection) urlobj.openConnection();
+                    HttpURLConnection connection = (HttpURLConnection) urlobj.openConnection();
 
-                    String postData = "songs=" + song.getTitle()
-                            + "artist=" + song.getTitle()
-                            + "year=" + song.getTitle();
-                    conn.setDoOutput(true);
-                    conn.setFixedLengthStreamingMode(postData.length());
 
-                    OutputStream out = conn.getOutputStream();
+                    String postData = "song=" + song.getTitle()
+                            + "&artist=" + song.getArtist()
+                            + "&year=" + song.getYear();
+
+                    // Set Output data
+                    connection.setDoOutput(true);
+                    connection.setFixedLengthStreamingMode(postData.length());
+
+                    //Output data
+                    OutputStream out = connection.getOutputStream();
                     out.write(postData.getBytes());
 
-                    if (conn.getResponseCode() == 200){
-                        InputStream in = conn.getInputStream();
+                    if (connection.getResponseCode() == 200){
+
+                        //Returns successful message
+                        InputStream in = connection.getInputStream();
                         BufferedReader br = new BufferedReader(new InputStreamReader(in));
                         String result = "", line;
                         while ((line = br.readLine()) != null)
                             result += line;
                         return result;
                     } else {
-                        return "HTTP ERROR:" + conn.getResponseCode();
+                        return "HTTP ERROR:" + connection.getResponseCode();
 
                     }
 
@@ -84,14 +92,19 @@ public class AddSongActivity extends AppCompatActivity implements View.OnClickLi
                 catch (IOException e){
                     return "Error" + e.getMessage();
                 }
-                finally {
-                    if (conn != null)
-                        conn.disconnect();
 
-                }
             }
             return "Error:";
         }
 
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            TextView resultsTextView= (TextView)findViewById(R.id.resultsText);
+            resultsTextView.setText(s);
+
+        }
     }
+
 }
